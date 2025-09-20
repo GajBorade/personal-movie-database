@@ -1,0 +1,5 @@
+# Database
+SQLAlchemy>=2.0
+
+# For API requests
+requests>=2.31
