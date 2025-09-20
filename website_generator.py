@@ -8,7 +8,10 @@ import os
 from sqlalchemy import create_engine, text
 
 # Define the database URI
-DB_URL = "sqlite:///movies.db"
+# Use same path logic as storage module
+project_root = os.path.dirname(os.path.abspath(__file__))  # Already in root
+DB_URL = f"sqlite:///{os.path.join(project_root, 'data', 'movies.db')}"
+
 # Movie image placeholder
 IMAGE_PLACEHOLDER = "https://placehold.jp/150x150.png"
 
@@ -41,7 +44,7 @@ def serialize_movies_data(movies_data):
     output = ""
     for movie in movies_data:
         output += f'<li class="movie-item">\n'
-        poster_path = "placeholder_image.png"
+        poster_path = "static/placeholder_image.png"
         poster = movie.get("poster_url")
         if not poster:
             poster = poster_path
@@ -92,7 +95,7 @@ def generate_website():
             }
             movies_from_database.append(movies_dict)
     # Read HTML template
-    movies_template_path = "index_template.html"
+    movies_template_path = "templates/index_template.html"
     movies_template_html = read_html_template(movies_template_path)
     print(movies_template_html)
 
