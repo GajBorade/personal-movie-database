@@ -2,10 +2,17 @@
 Movie API integration with OMDb API
 """
 
+import os
 import requests
+from dotenv import load_dotenv
+from storage import movie_storage_sql as storage
 from colorama import Fore, Style
 
-API_KEY = "ca5c32f4"
+
+# Load .env file
+load_dotenv(dotenv_path='config/.env')
+API_KEY = os.getenv('OMDB_API_KEY')
+
 REQUEST_URL = "http://www.omdbapi.com/"
 
 
@@ -197,6 +204,7 @@ def search_movie_api():
             )
 
             if confirm in ["y", "yes"]:
+                storage.add_movie(title, year, rating, poster_url)
                 return result
             elif confirm in ["n", "no"]:
                 print(
