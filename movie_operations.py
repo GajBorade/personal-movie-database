@@ -3,7 +3,7 @@ Core movie CRUD operations with API integration
 """
 
 import random
-import movie_storage_sql as storage
+from storage import movie_storage_sql as storage
 from colorama import Fore, Style
 from titlecase import titlecase
 from movie_validators import get_valid_title, get_valid_year_input, get_valid_ratings
